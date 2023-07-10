@@ -1,16 +1,17 @@
 # app_horta
 
-A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+O Horta App é uma aplicação móvel desenvolvida para monitorar e controlar dados de uma cultura cultivada em uma horta. Com este aplicativo, você poderá acompanhar o crescimento e o desenvolvimento das suas plantas, registrar informações relevantes para o cuidado adequado da sua horta.
 
-A few resources to get you started if this is your first Flutter project:
+## Recursos Principais
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+O Horta App oferece uma série de recursos úteis para ajudar você a cultivar uma horta saudável e produtiva. Alguns dos principais recursos incluem:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 1. Monitoramento de Dados
+
+O aplicativo permite que você acompanhe e registre informações sobre as suas plantas, como temperatura,umidade do ar, umidade do solo. Esses dados são essenciais para entender as necessidades das suas plantas e garantir que elas recebam os cuidados adequados.
+
+## Conclusão
+
+O Horta App é a ferramenta perfeita para monitorar e controlar os dados da sua horta. Com recursos abrangentes e fáceis de usar, você poderá cultivar plantas saudáveis e obter uma colheita abundante. 
