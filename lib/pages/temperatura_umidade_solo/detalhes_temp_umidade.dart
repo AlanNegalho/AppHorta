@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class ListTemp extends StatefulWidget {
@@ -16,14 +14,6 @@ class ListTemp extends StatefulWidget {
 
 Widget grafico = Container();
 bool graficoLoaded = false;
-
-// getGrafico() {
-//   if (!graficoLoaded) {
-//     grafico = GraficoHistorico(horta: widget.horta);
-//     graficoLoaded = true;
-//   }
-//   return grafico;
-// }
 
 class _ListTempState extends State<ListTemp> {
   @override

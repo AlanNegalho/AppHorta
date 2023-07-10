@@ -76,10 +76,10 @@ class _TemperSoloState extends State<TemperSolo> {
       body: _isLoading
           ? Container(
               alignment: Alignment.center,
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const CircularProgressIndicator(
+                  CircularProgressIndicator(
                     valueColor:
                         AlwaysStoppedAnimation<Color>(Colors.deepOrange),
                     backgroundColor: Color.fromARGB(26, 61, 49, 49),
@@ -126,44 +126,23 @@ class _TemperSoloState extends State<TemperSolo> {
                               .map((e) => double.parse(e['umidade']))
                               .toList(),
                           lineWidth: 2.0,
-
-                          //backgroundColor: Colors.red,
-                          //lineColor: Colors.lightGreen[500]!,
-                          //fillMode: FillMode.none,
-                          //fillColor: Colors.lightGreen[200]!,
                           useCubicSmoothing: true,
                           cubicSmoothingFactor: 0.2,
                           pointSize: 5.0,
-
                           gridLinelabelPrefix: '%',
                           fallbackHeight: 200.0,
                           fallbackWidth: 300.0,
-
                           gridLineAmount: 5,
-
                           enableGridLines: true,
-                          //averageLine: true,
-                          //averageLabel: true,
-
                           kLine: const ['max', 'min', 'first', 'last'],
                           max: 2.0,
                           min: -1.0,
-
-                          //enableThreshold: true,
-                          // lineGradient: LinearGradient(
-                          //   begin: Alignment.topCenter,
-                          //   end: Alignment.bottomCenter,
-                          //   colors: [
-                          //     Colors.purple[800]!,
-                          //     Colors.purple[200]!
-                          //   ],
-                          // ),
                         ),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 Row(
@@ -319,11 +298,10 @@ class _TemperSoloState extends State<TemperSolo> {
 
     try {
       var responseGet = await http.get(Uri.parse(urlGet));
-      print(responseGet.statusCode);
 
       if (responseGet.statusCode == 200) {
         final data = json.decode(responseGet.body);
-        print(data);
+
         id = data['id'];
         userAuth = data['user'];
       }
