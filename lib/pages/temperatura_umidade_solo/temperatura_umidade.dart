@@ -26,7 +26,7 @@ class _TempHumidadeState extends State<TempHumidade> {
   }
 
   void startTimer() {
-    Timer.periodic(const Duration(seconds: 1), (timer) {
+    Timer.periodic(const Duration(seconds: 10), (timer) {
       fetchData();
     });
   }
@@ -37,13 +37,13 @@ class _TempHumidadeState extends State<TempHumidade> {
     });
 
     final response =
-        await http.get(Uri.parse("http://192.168.3.13:8000/dadoshorta/"));
+        await http.get(Uri.parse("http://10.8.30.147:8000/dadoshorta/"));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       setState(() {
         _isLoading = false;
-        horta = List<Map<String, dynamic>>.from(data.reversed);
+        horta = List<Map<String, dynamic>>.from(data);
       });
     } else {
       setState(() {

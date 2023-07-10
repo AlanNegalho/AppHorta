@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:rolling_switch/rolling_switch.dart';
 import 'dart:convert';
 
 import 'detalhes_solo_temp.dart';
@@ -28,7 +29,7 @@ class _TemperSoloState extends State<TemperSolo> {
   }
 
   void startTimer() {
-    Timer.periodic(const Duration(seconds: 1), (timer) {
+    Timer.periodic(const Duration(seconds: 10), (timer) {
       fetchData();
     });
   }
@@ -39,7 +40,7 @@ class _TemperSoloState extends State<TemperSolo> {
     });
 
     final response =
-        await http.get(Uri.parse("http://192.168.3.13:8000/umidadesolo/"));
+        await http.get(Uri.parse("http://10.8.30.147:8000/umidadesolo/"));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
@@ -187,6 +188,32 @@ class _TemperSoloState extends State<TemperSolo> {
                           child: const Text("Ligar Bomba")),
                     ),
                     ElevatedButton(
+                      // RollingSwitch.icon(
+                      //   onChanged: (bool state) async {
+                      //     setState(() {
+                      //       click = true;
+                      //     });
+                      //     bool result = await setEstadoUser();
+                      //     setState(() {
+                      //       click = false;
+                      //     });
+                      //     if (result) {
+                      //       ScaffoldMessenger.of(context).showSnackBar(
+                      //         const SnackBar(
+                      //           content: Text("Modo Automático"),
+                      //           backgroundColor: Colors.green,
+                      //         ),
+                      //       );
+                      //     } else {
+                      //       ScaffoldMessenger.of(context).showSnackBar(
+                      //         const SnackBar(
+                      //           content: Text("Modo Manual"),
+                      //           backgroundColor: Colors.red,
+                      //         ),
+                      //       );
+                      //     }
+                      //   },
+                      // )
                       style: ButtonStyle(
                         minimumSize:
                             MaterialStateProperty.all(const Size(140, 38)),
@@ -230,46 +257,32 @@ class _TemperSoloState extends State<TemperSolo> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ElevatedButton(
-                      style: ButtonStyle(
-                        minimumSize:
-                            MaterialStateProperty.all(const Size(140, 38)),
-                        backgroundColor: MaterialStateProperty.all(
-                            const Color.fromARGB(255, 3, 14, 95)),
-                        side: MaterialStateProperty.all(
-                          const BorderSide(color: Colors.black),
-                        ),
-                      ),
-                      onPressed: click
-                          ? () {}
-                          : () async {
-                              setState(() {
-                                click = false;
-                              });
-                              bool result = await setEstadoUser();
-                              setState(() {
-                                click = false;
-                              });
-                              if (result) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(mensagem),
-                                    backgroundColor: Colors.green,
-                                  ),
-                                );
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(mensagem),
-                                    backgroundColor: Colors.red,
-                                  ),
-                                );
-                              }
-                            },
-                      child: const Text(
-                        "User Autorização",
-                      ),
-                    ),
+                    RollingSwitch.icon(
+                      onChanged: (bool state) async {
+                        setState(() {
+                          click = true;
+                        });
+                        bool result = await setEstadoUser();
+                        setState(() {
+                          click = false;
+                        });
+                        if (result) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(mensagem),
+                              backgroundColor: Colors.green,
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("Modo Manual"),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
+                      },
+                    )
                   ],
                 ),
                 const SizedBox(
@@ -292,7 +305,7 @@ class _TemperSoloState extends State<TemperSolo> {
   }
 
   Future<bool> setEstadoBomba(bool value) async {
-    String urlGet = "http://192.168.3.13:8000/bombausuario/1/";
+    String urlGet = "http://10.8.30.147:8000/bombausuario/1/";
     int id = 0;
     bool userAuth = false;
 
@@ -307,7 +320,7 @@ class _TemperSoloState extends State<TemperSolo> {
       }
 
       if (id == 1 && userAuth == true) {
-        String url = "http://192.168.3.13:8000/bombausuario/${id.toString()}/";
+        String url = "http://10.8.30.147:8000/bombausuario/${id.toString()}/";
         var response =
             await http.patch(Uri.parse(url), body: {"bomba": value.toString()});
 
@@ -324,7 +337,7 @@ class _TemperSoloState extends State<TemperSolo> {
   }
 
   Future<bool> setEstadoUser() async {
-    String urlGet = "http://192.168.3.13:8000/bombausuario/1/";
+    String urlGet = "http://10.8.30.147:8000/bombausuario/1/";
     int id = 0;
     bool userAuth = false;
     bool value = true;
@@ -345,7 +358,7 @@ class _TemperSoloState extends State<TemperSolo> {
           value = true;
         }
 
-        String url = "http://192.168.3.13:8000/bombausuario/${id.toString()}/";
+        String url = "http://10.8.30.147:8000/bombausuario/${id.toString()}/";
         var response =
             await http.put(Uri.parse(url), body: {"user": value.toString()});
 
