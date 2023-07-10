@@ -26,14 +26,14 @@ class _TempHumidadeState extends State<TempHumidade> {
   }
 
   void startTimer() {
-    Timer.periodic(const Duration(seconds: 8), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       fetchData();
     });
   }
 
   Future<void> fetchData() async {
     setState(() {
-      _isLoading = true;
+      //_isLoading = true;
     });
 
     final response =
@@ -47,7 +47,7 @@ class _TempHumidadeState extends State<TempHumidade> {
       });
     } else {
       setState(() {
-        _isLoading = false;
+        //_isLoading = false;
       });
     }
   }

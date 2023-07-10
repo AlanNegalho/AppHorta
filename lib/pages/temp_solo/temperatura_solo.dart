@@ -28,14 +28,14 @@ class _TemperSoloState extends State<TemperSolo> {
   }
 
   void startTimer() {
-    Timer.periodic(const Duration(seconds: 5), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       fetchData();
     });
   }
 
   Future<void> fetchData() async {
     setState(() {
-      _isLoading = true;
+      //_isLoading = true;
     });
 
     final response =
@@ -49,7 +49,7 @@ class _TemperSoloState extends State<TemperSolo> {
       });
     } else {
       setState(() {
-        _isLoading = false;
+        //_isLoading = false;
       });
     }
   }
